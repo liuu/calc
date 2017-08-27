@@ -5,6 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.javia.arity.Symbols;
+import org.javia.arity.SyntaxException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,7 +67,26 @@ public class MainActivity extends AppCompatActivity {
 
             break;
             case R.id.btn_equ:{
+                TextView formula = (TextView) findViewById(R.id.formula_area);
+                String strContent = formula.getText().toString();
 
+                try {
+                    Symbols s = new Symbols();
+                    double res = s.eval(strContent);
+                    String  resultText = String.valueOf(res);
+                    if (resultText.length() > 2 && resultText.endsWith(".0")){
+                        resultText = resultText.substring(0, resultText.length()-2);
+                    }
+
+                    TextView result = (TextView) findViewById(R.id.result_area);
+
+                    result.setText(resultText);
+
+                    formula.setText("");
+
+                } catch (SyntaxException e) {
+                    Toast.makeText(MainActivity.this, "错误！", Toast.LENGTH_SHORT).show();
+                }
             }
             break;
         }
