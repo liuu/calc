@@ -70,10 +70,17 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 }
 
+                if (strFormula.length() > 0 && strResult.length() == 0){
+                    break;
+                }
 
+//                if (strASMD.indexOf(formula.getText().charAt(strFormula.length() - 1)) >=0){
+//                    break;
+//                }
 
                 if (evalBeforeEqual){
-                    formula.setText(strFormula.subSequence(0, strFormula.length()-1) + strASMD );
+
+                    formula.setText(strFormula.subSequence(0, strFormula.length() - 1) + strASMD);
                     break;
                 }
                 else{
@@ -116,15 +123,14 @@ public class MainActivity extends AppCompatActivity {
             }
             break;
             case R.id.btn_del:{
-                TextView formula = (TextView) findViewById(R.id.formula_area);
-                if (formula.getText()!=null && formula.getText().length() > 0){
-                    formula.setText(formula.getText().subSequence(0, formula.getText().length()-1));
+                if(evalBeforeEqual) {
+                    break;
                 }
 
                 TextView result = (TextView) findViewById(R.id.result_area);
                 CharSequence resultText = result.getText();
-                if (resultText!=null && resultText.length() > 0){
-                    result.setText(resultText.subSequence(0, resultText.length()-1));
+                if (resultText != null && resultText.length() > 0) {
+                    result.setText(resultText.subSequence(0, resultText.length() - 1));
                 }
             }
 
